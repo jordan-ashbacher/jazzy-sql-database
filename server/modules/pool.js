@@ -1,5 +1,5 @@
 const pg = require('pg')
-const pool = pg.Pool
+const Pool = pg.Pool
 const pool = new Pool({
     database: 'jazzy_sql',
     host: 'localhost',
