@@ -33,8 +33,15 @@ app.post('/artist', (req, res) => {
 });
 
 app.get('/song', (req, res) => {
-    console.log(`In /songs GET`);
-    res.send(songList);
+    const queryText = `SELECT * FROM song ORDER BY title`
+
+    pool.query(queryText).then((result) => {
+        console.log(result)
+        res.send(result.rows)
+    }).catch((err) => {
+        console.log(err)
+        res.sendStatus(500)
+    })
 });
 
 app.post('/song', (req, res) => {
