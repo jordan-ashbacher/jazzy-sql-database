@@ -58,6 +58,18 @@ app.get('/song', (req, res) => {
 
 app.post('/song', (req, res) => {
     console.log(req.body)
+
+    const queryText = (`INSERT INTO song (title, length, released)
+    VALUES ($1, $2, $3)`)
+
+    pool.query(queryText, [req.body.title, req.body.length, req.body.released])
+    .then((result) => {
+        console.log(result)
+        res.sendStatus(201)
+    }).catch((err) => {
+        console.log(err)
+        res.sendStatus(500)
+    })
 });
 
 
